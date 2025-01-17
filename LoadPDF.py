@@ -18,7 +18,7 @@ index_name = 'langchain1'
 # Load and split the PDF document
 loader = PyPDFLoader("IOCResultsQ22024-25.pdf")
 data = loader.load()
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=4000, chunk_overlap=800)
 documents = text_splitter.split_documents(data)
 
 # Create and persist the vector store
