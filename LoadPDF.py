@@ -18,9 +18,14 @@ index_name = 'langchain1'
 # Load and split the PDF document
 loader = PyPDFLoader("IOCResultsQ22024-25.pdf")
 data = loader.load()
+
+full_text = " ".join([doc.page_content for doc in data])
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=4000, chunk_overlap=800)
-documents = text_splitter.split_documents(data)
+
+texts = text_splitter.split_text(full_text)
+#documents = text_splitter.split_documents(data)
 
 # Create and persist the vector store
-vectorstore = PineconeVectorStore.from_documents(documents, embeddings, index_name=index_name)
+#vectorstore = PineconeVectorStore.from_documents(documents, embeddings, index_name=index_name)
+vectorstore = PineconeVectorStore.from_texts(texts, embeddings, index_name=index_name)
 print("Embeddings created and stored.")

@@ -13,7 +13,7 @@ PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
 embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY, model = "text-embedding-ada-002")
 
 # Initialize OpenAI Chat Model
-llm = ChatOpenAI(temperature=0, openai_api_key=OPENAI_KEY, model="gpt-4o-mini")
+llm = ChatOpenAI(temperature=0.6, openai_api_key=OPENAI_KEY, model="gpt-4o-mini")
 
 # Reinitialize Pinecone and load the vector store
 Pinecone = Pinecone(api_key=PINECONE_API_KEY)
@@ -22,8 +22,8 @@ vectorstore = PineconeVectorStore(index_name=index_name, embedding=embeddings)
 
 # Query the vector store
 #query = "What was the revenue from operations for quarter ending 30.09.2024?"
-query = "What is the debt to equity ratio for the latest quarter. Is it healthy for an Oil company?"
-results = vectorstore.similarity_search(query)
+query = "What is the consolidated and standalone revenue growth over the last few quarters?"
+results = vectorstore.similarity_search(query, k=20)
 #print(results)
 
 # Use the retrieved context to generate an answer
