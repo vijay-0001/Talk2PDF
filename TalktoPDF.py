@@ -22,7 +22,7 @@ vectorstore = PineconeVectorStore(index_name=index_name, embedding=embeddings)
 
 # Query the vector store
 #query = "What was the revenue from operations for quarter ending 30.09.2024?"
-query = "What is the consolidated and standalone revenue growth over the last few quarters?"
+query = "What is the consolidated and standalone value for PPE for quarter ending 30-Sep-2024?"
 results = vectorstore.similarity_search(query, k=20)
 #print(results)
 
