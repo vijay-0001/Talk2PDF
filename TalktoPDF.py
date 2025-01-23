@@ -10,19 +10,20 @@ OPENAI_KEY = os.getenv('OPENAI_API_KEY')
 PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
 
 # Initialize OpenAI Embeddings
-embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY, model = "text-embedding-ada-002")
+# embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY, model = "text-embedding-ada-002")
+embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY, model = "text-embedding-3-small")
 
 # Initialize OpenAI Chat Model
 llm = ChatOpenAI(temperature=0.6, openai_api_key=OPENAI_KEY, model="gpt-4o-mini")
 
 # Reinitialize Pinecone and load the vector store
 Pinecone = Pinecone(api_key=PINECONE_API_KEY)
-index_name = 'langchain1'
+index_name = 'langchain2'
 vectorstore = PineconeVectorStore(index_name=index_name, embedding=embeddings)
 
 # Query the vector store
 #query = "What was the revenue from operations for quarter ending 30.09.2024?"
-query = "What is the consolidated and standalone value for PPE for quarter ending 30-Sep-2024?"
+query = "What dividends per unitholder have been distributed for the last few quarters? "
 results = vectorstore.similarity_search(query, k=20)
 #print(results)
 

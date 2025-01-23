@@ -9,14 +9,15 @@ OPENAI_KEY = os.getenv('OPENAI_API_KEY')
 PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
 
 # Initialize OpenAI Embeddings
-embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY, model = "text-embedding-ada-002")
+# embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY, model = "text-embedding-ada-002")
+embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY, model = "text-embedding-3-small")
 
 # Initialize Pinecone
 Pinecone = Pinecone(api_key=PINECONE_API_KEY)
-index_name = 'langchain1'
+index_name = 'langchain2'
 
 # Load and split the PDF document
-loader = PyPDFLoader("IOCResultsQ22024-25.pdf")
+loader = PyPDFLoader("PGINVIT_Financial_Results_for_Q3_FY_2025.pdf")
 data = loader.load()
 
 full_text = " ".join([doc.page_content for doc in data])
